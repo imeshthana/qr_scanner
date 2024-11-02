@@ -18,10 +18,24 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.dilshanbandara.react_native_qr_scanner"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "1bcff955-5872-45cc-9a67-007f555937c1"
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -32,17 +32,24 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>QR Scanner</Text>
+      </View>
+
       {isFocused ? (
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         />
       ) : null}
+
       {scanned && (
-        <TouchableOpacity style={styles.loadMoreButton} onPress={() => setScanned(false)}>
-        <Text style={styles.loadMoreButtonText}>Tap to Scan</Text>
+        <TouchableOpacity style={styles.button} onPress={() => setScanned(false)}>
+        <Text style={styles.buttonText}>Tap to Scan</Text>
       </TouchableOpacity>
       )}
+
     </View>
   );
 }
@@ -51,59 +58,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  permissionContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  header: {
+    backgroundColor: '#2196F3', 
+    paddingTop: 40,
+    paddingBottom: 16,
+    alignItems: 'center', 
   },
-  overlay: {
-    position: 'absolute',
-    top: '15.5%',
-    left: 0,
-    right: 0,
-    bottom: '15.5%',
-    justifyContent: 'center',
-    alignItems: 'center',
+  headerTitle: {
+    color: 'white',
+    fontSize: 20,
   },
-  overlayTop: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    width: '100%',
-  },
-  overlayCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  overlaySide: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    height: 200,
-  },
-  scanSquare: {
-    width: 200,
-    height: 200,
-    borderColor: 'white',
-  },
-  overlayBottom: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    width: '100%',
-  },
-  loadMoreButton: {
+  button: {
     position: 'absolute',
     bottom: 30,
-    backgroundColor: '#F15025',
+    backgroundColor: '#2196F3',
     padding: 6,
-    borderRadius: 8,
+    borderRadius: 30,
     alignItems: 'center',
     marginTop: 16,
-    width: '50%',
+    width: '40%',
     alignSelf: 'center',
     marginBottom: 16,
   },
-  loadMoreButtonText: {
+  buttonText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
   },
 });
